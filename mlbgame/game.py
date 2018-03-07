@@ -149,6 +149,7 @@ def scoreboard(year, month, day, home=None, away=None):
                 }
             # put this dictionary into the larger dictionary
             games[game_id] = output
+    data.close()
     return games
 
 
@@ -240,6 +241,7 @@ def box_score(game_id):
         home = x.attrib['home']
         away = x.attrib['away']
         result[int(inning)] = {'home': home, 'away': away}
+    data.close()
     return result
 
 
@@ -345,6 +347,7 @@ def overview(game_id):
     else:
         output.update(build_probable_starter_defaults('away'))
 
+    data.close()
     return output
 
 
@@ -545,6 +548,7 @@ def players(game_id):
             umpire[key] = u.get(key)
         output['umpires'].append(umpire)
 
+    data.close()
     return output
 
 

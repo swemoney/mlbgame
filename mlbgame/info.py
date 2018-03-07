@@ -22,7 +22,9 @@ def __get_league_object():
     # get data
     data = mlbgame.data.get_properties()
     # return league object
-    return etree.parse(data).getroot().find('leagues').find('league')
+    parsed = etree.parse(data).getroot().find('leagues').find('league')
+    data.close()
+    return parsed
 
 
 def league_info():
@@ -133,6 +135,7 @@ def roster(team_id):
     data = mlbgame.data.get_roster(team_id)
     parsed = json.loads(data.read().decode('utf-8'))
     players = parsed['roster_40']['queryResults']['row']
+    data.close()
     return {'players': players, 'team_id': team_id}
 
 
@@ -224,6 +227,7 @@ def standings(date):
                 'division': divs[division],
                 'teams': teams
             })
+    data.close()
     return {
         'standings_schedule_date': standings_schedule_date,
         'divisions': divisions,
@@ -317,6 +321,7 @@ class Team(mlbgame.object.Object):
 def injury():
     data = mlbgame.data.get_injuries()
     parsed = json.loads(data.read().decode('utf-8'))
+    data.close()
     return parsed['wsfb_news_injury']['queryResults']['row']
 
 

@@ -47,6 +47,7 @@ def game_events(game_id):
             'top': __inning_info(x, 'top'),
             'bottom': __inning_info(x, 'bottom')
         }
+    data.close()
     return output
 
 

@@ -90,6 +90,8 @@ def player_stats(game_id):
         'home_additional_batting': addl_home_batting,
         'away_additional_batting': addl_away_batting
     }
+    box_score.close()
+    raw_box_score.close()
     return output
 
 def __team_stats_info(data, output, output_key):
@@ -148,6 +150,8 @@ def team_stats(game_id):
     output = __team_stats_info(pitching, output, 'pitching')
     output = __team_stats_info(batting, output, 'batting')
     output = __raw_team_stats_info(raw_box_score_tree, output)
+    box_score.close()
+    raw_box_score.close()
     return output
 
 class Stats(object):
